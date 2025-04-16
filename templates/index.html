@@ -151,11 +151,11 @@
           if (imagenCargada) {
             ctx.drawImage(imagenCargada, 0, 0);
             ctx.fillStyle = "rgba(0,0,0,0.6)";
-            ctx.fillRect(0, canvas.height - 120, canvas.width, 120);
+            ctx.fillRect(0, 0, canvas.width, 180);
             ctx.fillStyle = "#ffffff";
-            ctx.font = "30px Arial";
+            ctx.font = "80px Arial";
             resumen.forEach((line, i) => {
-              ctx.fillText(line, 20, canvas.height - 80 + (i * 30));
+              ctx.fillText(line, 30, 60 + (i * 50));
             });
           }
         } else {
