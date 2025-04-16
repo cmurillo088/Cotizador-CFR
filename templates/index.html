@@ -85,6 +85,7 @@
     <input type="file" accept="image/*" id="foto" capture="environment">
 
     <button type="submit">Calcular</button>
+    <button type="button" id="descargar">Descargar imagen</button>
   </form>
 
   <h3>Resultado:</h3>
@@ -149,12 +150,12 @@
 
           if (imagenCargada) {
             ctx.drawImage(imagenCargada, 0, 0);
-            ctx.fillStyle = "rgba(0,0,0,0.5)";
-            ctx.fillRect(0, canvas.height - 100, canvas.width, 100);
+            ctx.fillStyle = "rgba(0,0,0,0.6)";
+            ctx.fillRect(0, canvas.height - 120, canvas.width, 120);
             ctx.fillStyle = "#ffffff";
-            ctx.font = "20px Arial";
+            ctx.font = "30px Arial";
             resumen.forEach((line, i) => {
-              ctx.fillText(line, 10, canvas.height - 70 + (i * 22));
+              ctx.fillText(line, 20, canvas.height - 80 + (i * 30));
             });
           }
         } else {
@@ -164,6 +165,13 @@
       .catch(() => {
         document.getElementById('resultado').textContent = 'Ocurrió un error al procesar la solicitud.';
       });
+    });
+
+    document.getElementById('descargar').addEventListener('click', function() {
+      const enlace = document.createElement('a');
+      enlace.download = 'cotizador_resultado.png';
+      enlace.href = canvas.toDataURL();
+      enlace.click();
     });
   </script>
 </body>
