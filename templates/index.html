@@ -6,7 +6,7 @@
   <title>Calculadora CFR</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background-color: #f0f9f9;
       color: #333;
       padding: 20px;
@@ -16,50 +16,55 @@
     h2 {
       color: #006d77;
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 2rem;
+      margin-bottom: 30px;
     }
     label {
       font-weight: bold;
       color: #2a9d8f;
       display: block;
-      margin-top: 10px;
+      margin-top: 15px;
+      font-size: 1.3rem;
     }
     input, button {
       width: 100%;
-      padding: 10px;
-      margin: 6px 0 12px;
+      padding: 15px;
+      margin: 8px 0 20px;
       border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1rem;
+      border-radius: 6px;
+      font-size: 1.2rem;
     }
     button {
       background-color: #00a896;
       color: white;
       cursor: pointer;
+      font-weight: bold;
     }
     button:hover {
       background-color: #028090;
     }
     #resultado p {
-      background-color: #e0f7f1;
-      padding: 10px;
-      border-left: 4px solid #00a896;
-      border-radius: 4px;
-      font-size: 0.95rem;
-      margin: 5px 0;
+      background-color: #d2f4ec;
+      padding: 15px;
+      border-left: 5px solid #00a896;
+      border-radius: 6px;
+      font-size: 1.4rem;
+      margin: 10px 0;
     }
     #canvas-container {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 30px;
     }
     canvas {
       max-width: 100%;
       height: auto;
+      border-radius: 10px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <h2>Calculadora de CFR</h2>
+  <h2>Calculadora de Costos CFR</h2>
   <form id="cotizador-form">
     <label>Precio FOB por unidad ($):</label>
     <input type="number" step="0.0001" name="fob">
@@ -85,10 +90,10 @@
     <input type="file" accept="image/*" id="foto" capture="environment">
 
     <button type="submit">Calcular</button>
-    <button type="button" id="descargar">Descargar imagen</button>
+    <button type="button" onclick="descargarCanvas()">Descargar imagen</button>
   </form>
 
-  <h3>Resultado:</h3>
+  <h3 style="font-size: 1.6rem; margin-top: 30px;">Resultado:</h3>
   <div id="resultado"></div>
 
   <div id="canvas-container">
@@ -113,6 +118,13 @@
         img.src = URL.createObjectURL(file);
       }
     });
+
+    function descargarCanvas() {
+      const link = document.createElement('a');
+      link.download = 'cotizacion.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    }
 
     document.getElementById('cotizador-form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -141,7 +153,10 @@
           data.forEach(item => {
             const key = Object.keys(item)[0];
             let value = item[key];
-            if (key === 'Precio total puesto en Ecuador') value = (value * 1.06).toFixed(4);
+            if (key === 'Precio total puesto en Ecuador') {
+              value = (value * 1.06).toFixed(4);
+              item[key] = parseFloat(value);
+            }
             const p = document.createElement('p');
             p.innerHTML = `<strong>${key}:</strong> $${value}`;
             contenedor.appendChild(p);
@@ -151,11 +166,11 @@
           if (imagenCargada) {
             ctx.drawImage(imagenCargada, 0, 0);
             ctx.fillStyle = "rgba(0,0,0,0.6)";
-            ctx.fillRect(0, 0, canvas.width, 180);
+            ctx.fillRect(0, canvas.height - 120, canvas.width, 120);
             ctx.fillStyle = "#ffffff";
-            ctx.font = "80px Arial";
+            ctx.font = "26px Arial";
             resumen.forEach((line, i) => {
-              ctx.fillText(line, 30, 60 + (i * 50));
+              ctx.fillText(line, 20, canvas.height - 90 + (i * 30));
             });
           }
         } else {
@@ -165,13 +180,6 @@
       .catch(() => {
         document.getElementById('resultado').textContent = 'Ocurrió un error al procesar la solicitud.';
       });
-    });
-
-    document.getElementById('descargar').addEventListener('click', function() {
-      const enlace = document.createElement('a');
-      enlace.download = 'cotizador_resultado.png';
-      enlace.href = canvas.toDataURL();
-      enlace.click();
     });
   </script>
 </body>
