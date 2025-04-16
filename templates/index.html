@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +23,7 @@
       display: block;
       margin-top: 10px;
     }
-    input {
+    input, button {
       width: 100%;
       padding: 10px;
       margin: 6px 0 12px;
@@ -35,13 +34,7 @@
     button {
       background-color: #00a896;
       color: white;
-      padding: 12px;
-      border: none;
-      border-radius: 4px;
       cursor: pointer;
-      width: 100%;
-      font-size: 1rem;
-      margin-top: 15px;
     }
     button:hover {
       background-color: #028090;
@@ -54,38 +47,64 @@
       font-size: 0.95rem;
       margin: 5px 0;
     }
+    #canvas-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    canvas {
+      max-width: 100%;
+      height: auto;
+    }
   </style>
 </head>
 <body>
   <h2>Calculadora de CFR</h2>
   <form id="cotizador-form">
     <label>Precio FOB por unidad ($):</label>
-    <input type="number" step="0.0001" name="fob">
+    <input type="number" step="0.0001" name="fob"><label>Dimensiones de la caja (en metros):</label>
+<input type="number" step="0.0001" name="largo" placeholder="Largo">
+<input type="number" step="0.0001" name="ancho" placeholder="Ancho">
+<input type="number" step="0.0001" name="alto" placeholder="Alto">
 
-    <label>Dimensiones de la caja (en metros):</label>
-    <input type="number" step="0.0001" name="largo" placeholder="Largo">
-    <input type="number" step="0.0001" name="ancho" placeholder="Ancho">
-    <input type="number" step="0.0001" name="alto" placeholder="Alto">
+<label>O ingresa directamente el CBM:</label>
+<input type="number" step="0.0001" name="cbm">
 
-    <label>O ingresa directamente el CBM:</label>
-    <input type="number" step="0.0001" name="cbm">
+<label>Tarifa de flete por CBM ($):</label>
+<input type="number" step="0.0001" name="tarifa_flete">
 
-    <label>Tarifa de flete por CBM ($):</label>
-    <input type="number" step="0.0001" name="tarifa_flete">
+<label>Unidades por caja:</label>
+<input type="number" name="unidades_por_caja">
 
-    <label>Unidades por caja:</label>
-    <input type="number" name="unidades_por_caja">
+<label>Arancel (%):</label>
+<input type="number" step="0.0001" name="arancel">
 
-    <label>Arancel (%):</label>
-    <input type="number" step="0.0001" name="arancel">
+<label>Sube o toma una foto:</label>
+<input type="file" accept="image/*" id="foto" capture="environment">
 
-    <button type="submit">Calcular</button>
-  </form>
+<button type="submit">Calcular</button>
 
-  <h3>Resultado:</h3>
-  <div id="resultado"></div>
+  </form>  <h3>Resultado:</h3>
+  <div id="resultado"></div>  <div id="canvas-container">
+    <canvas id="fotoCanvas"></canvas>
+  </div>  <script>
+    const canvas = document.getElementById('fotoCanvas');
+    const ctx = canvas.getContext('2d');
+    let imagenCargada = null;
 
-  <script>
+    document.getElementById('foto').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const img = new Image();
+        img.onload = function() {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          imagenCargada = img;
+        }
+        img.src = URL.createObjectURL(file);
+      }
+    });
+
     document.getElementById('cotizador-form').addEventListener('submit', function(e) {
       e.preventDefault();
       const form = e.target;
@@ -107,14 +126,28 @@
       .then(data => {
         const contenedor = document.getElementById('resultado');
         contenedor.innerHTML = '';
+
         if (Array.isArray(data)) {
+          let resumen = [];
           data.forEach(item => {
             const key = Object.keys(item)[0];
             const value = item[key];
             const p = document.createElement('p');
             p.innerHTML = `<strong>${key}:</strong> $${value}`;
             contenedor.appendChild(p);
+            resumen.push(`${key}: $${value}`);
           });
+
+          if (imagenCargada) {
+            ctx.drawImage(imagenCargada, 0, 0);
+            ctx.fillStyle = "rgba(0,0,0,0.5)";
+            ctx.fillRect(0, canvas.height - 100, canvas.width, 100);
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "20px Arial";
+            resumen.forEach((line, i) => {
+              ctx.fillText(line, 10, canvas.height - 70 + (i * 22));
+            });
+          }
         } else {
           contenedor.textContent = 'Error en los datos ingresados.';
         }
@@ -123,7 +156,5 @@
         document.getElementById('resultado').textContent = 'Ocurrió un error al procesar la solicitud.';
       });
     });
-  </script>
-</body>
+  </script></body>
 </html>
-
