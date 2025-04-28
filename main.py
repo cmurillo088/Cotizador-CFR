@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, jsonify
 import os
 
@@ -34,4 +33,5 @@ def calcular():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-app.run(host='0.0.0.0', port=8080)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)
