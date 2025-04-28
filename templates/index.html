@@ -152,9 +152,9 @@ document.getElementById('cotizador-form').addEventListener('submit', function(e)
         ctx.fillStyle = "rgba(0,0,0,0.6)";
         ctx.fillRect(0, 0, canvas.width, resumen.length * 70);
         ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 48px Arial";
+        ctx.font = "bold 144px Arial";
         resumen.forEach((line, i) => {
-          ctx.fillText(line, 30, 60 + (i * 65));
+          ctx.fillText(line, 30, 180 + (i * 180));
         });
       }
     } else {
