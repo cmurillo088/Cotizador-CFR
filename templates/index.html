@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora CFR Final</title>
+  <title>Calculadora CFR</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -48,104 +48,8 @@
 <body>
   <h2>Calculadora de Costos CFR</h2>
   <form id="cotizador-form">
-    <label>Categoría:</label>
-    <select id="categoria" onchange="asignarArancel()">
-<option value="">Seleccione una categoría</option>
-<option value="ALIMENTADOR">ALIMENTADOR</option>
-<option value="ASIENTO PARA INODORO">ASIENTO PARA INODORO</option>
-<option value="ASPIRADOR NASAL">ASPIRADOR NASAL</option>
-<option value="GORRO DESCARTABLE">GORRO DESCARTABLE</option>
-<option value="JUGUETE">JUGUETE</option>
-<option value="VASOS">VASOS</option>
-<option value="CEPILLO Y PEINILLA">CEPILLO Y PEINILLA</option>
-<option value="HIGIENE BUCAL">HIGIENE BUCAL</option>
-<option value="SET DE CUBIERTOS">SET DE CUBIERTOS</option>
-<option value="ALGODON">ALGODON</option>
-<option value="ALCOHOL SWAB">ALCOHOL SWAB</option>
-<option value="APOSITOS">APOSITOS</option>
-<option value="ENTRETENEDOR">ENTRETENEDOR</option>
-<option value="EXTRACTOR DE LECHE">EXTRACTOR DE LECHE</option>
-<option value="HIGIENE DEL BEBE">HIGIENE DEL BEBE</option>
-<option value="MASTICADOR INFANTIL">MASTICADOR INFANTIL</option>
-<option value="MEDIDOR DE LECHE">MEDIDOR DE LECHE</option>
-<option value="TETINA">TETINA</option>
-<option value="BAJALENGUA">BAJALENGUA</option>
-<option value="BOLSA AGUA CALIENTE">BOLSA AGUA CALIENTE</option>
-<option value="BOLSA DE COLOSTOMIA">BOLSA DE COLOSTOMIA</option>
-<option value="BOLSA DE HIELO">BOLSA DE HIELO</option>
-<option value="BRAZALETE">BRAZALETE</option>
-<option value="JUEGO DE IRRIGACION">JUEGO DE IRRIGACION</option>
-<option value="ENVASE ALMACENAMIENTO">ENVASE ALMACENAMIENTO</option>
-<option value="TOALLITA DE BAÑO SECO">TOALLITA DE BAÑO SECO</option>
-<option value="TORNIQUETE">TORNIQUETE</option>
-<option value="TAZA">TAZA</option>
-<option value="TOALLAS HUMEDAS">TOALLAS HUMEDAS</option>
-<option value="BIBERON">BIBERON</option>
-<option value="PAÑUELO FACIAL">PAÑUELO FACIAL</option>
-<option value="PROTECTOR DE PEZON">PROTECTOR DE PEZON</option>
-<option value="TERMO">TERMO</option>
-<option value="GASA">GASA</option>
-<option value="GUANTE EXAMINACION">GUANTE EXAMINACION</option>
-<option value="GUANTE QUIRURGICO">GUANTE QUIRURGICO</option>
-<option value="LAVABOTELLA">LAVABOTELLA</option>
-<option value="OLLA ESTERILIZADORA">OLLA ESTERILIZADORA</option>
-<option value="VENDAS">VENDAS</option>
-<option value="HISOPOS">HISOPOS</option>
-<option value="KIT GLUCOMETRO Y TIRILLAS">KIT GLUCOMETRO Y TIRILLAS</option>
-<option value="SUERO CLORURO DE SODIO">SUERO CLORURO DE SODIO</option>
-<option value="FUNDA RECOLECTORA DE ORINA">FUNDA RECOLECTORA DE ORINA</option>
-<option value="CATETER SEGURIDAD">CATETER SEGURIDAD</option>
-<option value="JERINGA DE INSULINA">JERINGA DE INSULINA</option>
-<option value="NEBULIZADOR">NEBULIZADOR</option>
-<option value="AEROCAMARAS">AEROCAMARAS</option>
-<option value="AGUJA DE ANESTESIA">AGUJA DE ANESTESIA</option>
-<option value="AGUJA DESCARTABLE">AGUJA DESCARTABLE</option>
-<option value="AGUJA TOMA MULTIPLE">AGUJA TOMA MULTIPLE</option>
-<option value="ASIENTO PARA ENFERMO">ASIENTO PARA ENFERMO</option>
-<option value="CATETER">CATETER</option>
-<option value="CONECTOR DE SEGURIDAD">CONECTOR DE SEGURIDAD</option>
-<option value="ELECTRODO">ELECTRODO</option>
-<option value="EQUIPO DE MICROGOTERO">EQUIPO DE MICROGOTERO</option>
-<option value="EQUIPO DE VENOCLISIS">EQUIPO DE VENOCLISIS</option>
-<option value="EQUIPO PERICRANEAL">EQUIPO PERICRANEAL</option>
-<option value="ESPARADRAPOS">ESPARADRAPOS</option>
-<option value="ESPECULO VAGINAL">ESPECULO VAGINAL</option>
-<option value="HOJA DE BISTURI">HOJA DE BISTURI</option>
-<option value="LANCETAS">LANCETAS</option>
-<option value="LLAVE DE TRES VIAS">LLAVE DE TRES VIAS</option>
-<option value="MASCARILLA CON MICRONEBULIZADOR">MASCARILLA CON MICRONEBULIZADOR</option>
-<option value="MASCARILLA DESCARTABLE">MASCARILLA DESCARTABLE</option>
-<option value="OXIMETRO DE PULSO">OXIMETRO DE PULSO</option>
-<option value="PRESERVATIVO">PRESERVATIVO</option>
-<option value="PUNTAS PARA MICROPIPETA">PUNTAS PARA MICROPIPETA</option>
-<option value="SONDA">SONDA</option>
-<option value="TERMOMETRO">TERMOMETRO</option>
-<option value="TUBO AL VACIO">TUBO AL VACIO</option>
-<option value="JERINGA DESCARTABLE">JERINGA DESCARTABLE</option>
-<option value="BARRERA DE PIEL PARA BOLSA DE COLOSTOMIA">BARRERA DE PIEL PARA BOLSA DE COLOSTOMIA</option>
-<option value="CANULA DE OXIGENO">CANULA DE OXIGENO</option>
-<option value="CHINESCO">CHINESCO</option>
-<option value="CLAMP UMBILICAL">CLAMP UMBILICAL</option>
-<option value="CURA VENDITAS">CURA VENDITAS</option>
-<option value="DUCHA VAGINAL">DUCHA VAGINAL</option>
-<option value="FORMADOR PEZON">FORMADOR PEZON</option>
-<option value="HUMIDIFICADOR">HUMIDIFICADOR</option>
-<option value="MASCARILLA DE OXIGENO">MASCARILLA DE OXIGENO</option>
-<option value="OZONIFICADOR">OZONIFICADOR</option>
-<option value="PLATOS GRANEL">PLATOS GRANEL</option>
-<option value="RECOLECTOR DE LECHE">RECOLECTOR DE LECHE</option>
-<option value="SET DE LACTANCIA MATERNA">SET DE LACTANCIA MATERNA</option>
-<option value="SET DE VAJILLA">SET DE VAJILLA</option>
-<option value="SUERO DEXTROSA">SUERO DEXTROSA</option>
-<option value="TENSIOMETRO">TENSIOMETRO</option>
-<option value="TERNO QUIRURGICO">TERNO QUIRURGICO</option>
-<option value="TEXTIL INFANTIL">TEXTIL INFANTIL</option>
-<option value="VENTOSA PARA GASES">VENTOSA PARA GASES</option>
-<option value="ZAPATONES DESCARTABLE">ZAPATONES DESCARTABLE</option>
-    </select>
-
     <label>Precio FOB por unidad ($):</label>
-    <input type="number" step="0.0001" name="fob">
+    <input type="number" step="0.0001" name="fob" required>
 
     <label>Dimensiones de la caja (en metros):</label>
     <input type="number" step="0.0001" name="largo" placeholder="Largo">
@@ -156,13 +60,13 @@
     <input type="number" step="0.0001" name="cbm">
 
     <label>Tarifa de flete por CBM ($):</label>
-    <input type="number" step="0.0001" name="tarifa_flete">
+    <input type="number" step="0.0001" name="tarifa_flete" required>
 
     <label>Unidades por caja:</label>
-    <input type="number" name="unidades_por_caja">
+    <input type="number" name="unidades_por_caja" required>
 
     <label>Arancel (%):</label>
-    <input type="number" step="0.01" id="arancel" name="arancel">
+    <input type="number" step="0.01" id="arancel" name="arancel" required>
 
     <label>Número de Stand:</label>
     <input type="text" name="stand">
@@ -178,110 +82,10 @@
 
   <canvas id="fotoCanvas"></canvas>
 
-  <script>
-const aranceles = {
-"ALIMENTADOR": 35.5,
-"ASIENTO PARA INODORO": 35.5,
-"ASPIRADOR NASAL": 35.5,
-"GORRO DESCARTABLE": 35.5,
-"JUGUETE": 35.5,
-"VASOS": 35.5,
-"CEPILLO Y PEINILLA": 33.5,
-"HIGIENE BUCAL": 33.5,
-"SET DE CUBIERTOS": 33.5,
-"ALGODON": 30.5,
-"ALCOHOL SWAB": 30.5,
-"APOSITOS": 30.5,
-"ENTRETENEDOR": 30.5,
-"EXTRACTOR DE LECHE": 30.5,
-"HIGIENE DEL BEBE": 30.5,
-"MASTICADOR INFANTIL": 30.5,
-"MEDIDOR DE LECHE": 30.5,
-"TETINA": 30.5,
-"BAJALENGUA": 28.0,
-"BOLSA AGUA CALIENTE": 28.0,
-"BOLSA DE COLOSTOMIA": 28.0,
-"BOLSA DE HIELO": 28.0,
-"BRAZALETE": 28.0,
-"JUEGO DE IRRIGACION": 28.0,
-"ENVASE ALMACENAMIENTO": 25.5,
-"TOALLITA DE BAÑO SECO": 25.5,
-"TORNIQUETE": 25.5,
-"TAZA": 25.5,
-"TOALLAS HUMEDAS": 25.5,
-"BIBERON": 24.5,
-"PAÑUELO FACIAL": 24.5,
-"PROTECTOR DE PEZON": 24.5,
-"TERMO": 24.3,
-"GASA": 20.5,
-"GUANTE EXAMINACION": 20.5,
-"GUANTE QUIRURGICO": 20.5,
-"LAVABOTELLA": 20.5,
-"OLLA ESTERILIZADORA": 20.5,
-"VENDAS": 20.5,
-"HISOPOS": 19.35,
-"KIT GLUCOMETRO Y TIRILLAS": 18.83,
-"SUERO CLORURO DE SODIO": 10.5,
-"FUNDA RECOLECTORA DE ORINA": 9.5,
-"CATETER SEGURIDAD": 5.5,
-"JERINGA DE INSULINA": 5.5,
-"NEBULIZADOR": 5.5,
-"AEROCAMARAS": 5.5,
-"AGUJA DE ANESTESIA": 5.5,
-"AGUJA DESCARTABLE": 5.5,
-"AGUJA TOMA MULTIPLE": 5.5,
-"ASIENTO PARA ENFERMO": 5.5,
-"CATETER": 5.5,
-"CONECTOR DE SEGURIDAD": 5.5,
-"ELECTRODO": 5.5,
-"EQUIPO DE MICROGOTERO": 5.5,
-"EQUIPO DE VENOCLISIS": 5.5,
-"EQUIPO PERICRANEAL": 5.5,
-"ESPARADRAPOS": 5.5,
-"ESPECULO VAGINAL": 5.5,
-"HOJA DE BISTURI": 5.5,
-"LANCETAS": 5.5,
-"LLAVE DE TRES VIAS": 5.5,
-"MASCARILLA CON MICRONEBULIZADOR": 5.5,
-"MASCARILLA DESCARTABLE": 5.5,
-"OXIMETRO DE PULSO": 5.5,
-"PRESERVATIVO": 5.5,
-"PUNTAS PARA MICROPIPETA": 5.5,
-"SONDA": 5.5,
-"TERMOMETRO": 5.5,
-"TUBO AL VACIO": 5.5,
-"JERINGA DESCARTABLE": 5.5,
-"BARRERA DE PIEL PARA BOLSA DE COLOSTOMIA": nan,
-"CANULA DE OXIGENO": nan,
-"CHINESCO": nan,
-"CLAMP UMBILICAL": nan,
-"CURA VENDITAS": nan,
-"DUCHA VAGINAL": nan,
-"FORMADOR PEZON": nan,
-"HUMIDIFICADOR": nan,
-"MASCARILLA DE OXIGENO": nan,
-"OZONIFICADOR": nan,
-"PLATOS GRANEL": nan,
-"RECOLECTOR DE LECHE": nan,
-"SET DE LACTANCIA MATERNA": nan,
-"SET DE VAJILLA": nan,
-"SUERO DEXTROSA": nan,
-"TENSIOMETRO": nan,
-"TERNO QUIRURGICO": nan,
-"TEXTIL INFANTIL": nan,
-"VENTOSA PARA GASES": nan,
-"ZAPATONES DESCARTABLE": nan,
-};
-
+<script>
 const canvas = document.getElementById('fotoCanvas');
 const ctx = canvas.getContext('2d');
 let imagenCargada = null;
-
-function asignarArancel() {
-  const categoria = document.getElementById('categoria').value;
-  const arancelInput = document.getElementById('arancel');
-  arancelInput.value = categoria && aranceles[categoria] ? aranceles[categoria] : '';
-}
 
 document.getElementById('foto').addEventListener('change', function(e) {
   const file = e.target.files[0];
@@ -308,6 +112,7 @@ document.getElementById('cotizador-form').addEventListener('submit', function(e)
   e.preventDefault();
   const form = e.target;
   const stand = form.stand.value || '';
+
   fetch('/calcular', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -361,5 +166,6 @@ document.getElementById('cotizador-form').addEventListener('submit', function(e)
   });
 });
 </script>
+
 </body>
 </html>
