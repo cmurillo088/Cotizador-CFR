@@ -1,18 +1,6 @@
 from flask import Flask, render_template, request, jsonify
-import os
 
 app = Flask(__name__, template_folder='templates')
-
-def calcular_cfr(fob, cbm, tarifa_flete, unidades_por_caja, arancel):
-    costo_flete_caja = cbm * tarifa_flete
-    costo_flete_unidad = costo_flete_caja / unidades_por_caja
-    cfr = ((fob + costo_flete_unidad) / 0.92) #8%SAM
-    precio_total = cfr + (cfr * (arancel / 100))
-    return [
-        {"FOB por unidad": round(fob, 4)},
-        {"CFR por unidad": round(cfr, 4)},
-        {"Precio total puesto en Ecuador": round(precio_total, 4)}
-    ]
 
 @app.route('/')
 def index():
@@ -23,13 +11,32 @@ def calcular():
     try:
         data = request.get_json()
         fob = float(data['fob'])
-        cbm = float(data['cbm']) if data['cbm'] else float(data['largo']) * float(data['ancho']) * float(data['alto'])
+        largo = data.get('largo')
+        ancho = data.get('ancho')
+        alto = data.get('alto')
+        cbm = float(data['cbm']) if data['cbm'] else (
+            float(largo) * float(ancho) * float(alto) if largo and ancho and alto else 0
+        )
         tarifa_flete = float(data['tarifa_flete'])
-        unidades_por_caja = int(data['unidades_por_caja'])
+        unidades_por_caja = int(data['unidades_por_caja']) if data['unidades_por_caja'] else 0
         arancel = float(data['arancel'])
 
-        resultado = calcular_cfr(fob, cbm, tarifa_flete, unidades_por_caja, arancel)
+        if cbm > 0 and unidades_por_caja > 0:
+            costo_flete_caja = round(cbm * tarifa_flete, 4)
+            costo_flete_unidad = round(costo_flete_caja / unidades_por_caja, 6)
+            cfr = round((fob + costo_flete_unidad) / 0.92, 4)
+        else:
+            cfr = round(fob / 0.92, 4)
+
+        precio_total = round(cfr * (1 + arancel / 100) * 1.06, 4)
+
+        resultado = [
+            {"FOB por unidad": round(fob, 4)},
+            {"CFR por unidad": cfr},
+            {"Precio total puesto en Ecuador": precio_total}
+        ]
         return jsonify(resultado)
+
     except Exception as e:
         return jsonify({"error": str(e)})
 
